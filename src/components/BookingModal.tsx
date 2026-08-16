@@ -16,7 +16,6 @@ interface BookingModalProps {
 
 interface Participant {
   name: string;
-  idNumber: string; // Passport / KTP
   ageCategory: 'Dewasa' | 'Anak';
 }
 
@@ -44,8 +43,8 @@ export default function BookingModal({
 
   // Dynamic Participants state
   const [participants, setParticipants] = useState<Participant[]>([
-    { name: '', idNumber: '', ageCategory: 'Dewasa' },
-    { name: '', idNumber: '', ageCategory: 'Dewasa' },
+    { name: '', ageCategory: 'Dewasa' },
+    { name: '', ageCategory: 'Dewasa' },
   ]);
 
   // Payment State
@@ -75,7 +74,7 @@ export default function BookingModal({
       if (next.length < guests) {
         // Add new blank participants
         while (next.length < guests) {
-          next.push({ name: '', idNumber: '', ageCategory: 'Dewasa' });
+          next.push({ name: '', ageCategory: 'Dewasa' });
         }
       } else if (next.length > guests) {
         // Trim participants
@@ -165,14 +164,10 @@ export default function BookingModal({
       return false;
     }
 
-    // Validate each participant
+    // Validate each participant name
     for (let i = 0; i < participants.length; i++) {
       if (!participants[i].name.trim()) {
         alert(`Mohon lengkapi nama untuk Peserta #${i + 1}`);
-        return false;
-      }
-      if (!participants[i].idNumber.trim()) {
-        alert(`Mohon lengkapi nomor KTP / Paspor untuk Peserta #${i + 1}`);
         return false;
       }
     }
@@ -193,7 +188,7 @@ export default function BookingModal({
       .join('\n');
 
     const participantsList = participants
-      .map((p, i) => `  ${i + 1}. ${p.name} (${p.ageCategory}) - KTP/Paspor: ${p.idNumber}`)
+      .map((p, i) => `  ${i + 1}. ${p.name} (${p.ageCategory})`)
       .join('\n');
 
     return `*RESERVASI TOUR - GEDE BALI TRIP*
@@ -438,21 +433,13 @@ Halo Tim Gede Bali Trip, saya ingin mengonfirmasi pemesanan dan pembayaran untuk
                           </div>
                         </div>
 
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
                           <input
                             type="text"
                             required
                             placeholder={`Nama Lengkap Peserta #${idx + 1}`}
                             value={part.name}
                             onChange={(e) => handleParticipantChange(idx, 'name', e.target.value)}
-                            className="w-full bg-neutral-950 border border-gold-400/15 px-3 py-2.5 text-xs text-gold-100 rounded-sm focus:outline-none focus:border-gold-400 placeholder-gold-300/20"
-                          />
-                          <input
-                            type="text"
-                            required
-                            placeholder="Nomor KTP / Paspor"
-                            value={part.idNumber}
-                            onChange={(e) => handleParticipantChange(idx, 'idNumber', e.target.value)}
                             className="w-full bg-neutral-950 border border-gold-400/15 px-3 py-2.5 text-xs text-gold-100 rounded-sm focus:outline-none focus:border-gold-400 placeholder-gold-300/20"
                           />
                         </div>
@@ -923,7 +910,6 @@ Halo Tim Gede Bali Trip, saya ingin mengonfirmasi pemesanan dan pembayaran untuk
                           <div className="text-left space-y-1">
                             <span className="text-[8px] font-mono text-gold-400/50 uppercase">PASS HOLDER #{i + 1}</span>
                             <p className="font-serif text-sm text-gold-200 font-bold">{part.name}</p>
-                            <p className="font-mono text-[10px] text-gold-100/50">ID/Paspor: {part.idNumber}</p>
                           </div>
                           <span className="inline-block mt-3 px-2 py-0.5 bg-gold-400/10 border border-gold-400/25 rounded text-[8px] font-mono font-bold text-gold-400 uppercase w-fit">
                             {part.ageCategory}

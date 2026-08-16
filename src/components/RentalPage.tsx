@@ -513,7 +513,7 @@ Halo Gede Bali Trip, saya ingin memesan sewa kendaraan sesuai rincian di atas. M
                     <input
                       type="text"
                       required
-                      placeholder="Nama Lengkap Sesuai KTP / Paspor"
+                      placeholder="Nama Lengkap Penyewa"
                       value={fullName}
                       onChange={(e) => setFullName(e.target.value)}
                       className="w-full bg-neutral-900 border border-gold-400/15 px-4 py-3 text-sm text-gold-100 rounded-sm focus:outline-none focus:border-gold-400 placeholder-gold-300/20"
