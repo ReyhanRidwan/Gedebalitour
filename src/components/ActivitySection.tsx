@@ -1,49 +1,86 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { Sparkles, MapPin, Clock, ArrowRight, Shield, Star, Award, Compass, Flame, Waves, Wind } from 'lucide-react';
-import { EXPERIENCES } from '../data';
 
 interface ActivitySectionProps {
   onBookNow: (experienceId: string) => void;
 }
 
-export default function ActivitySection({ onBookNow }: ActivitySectionProps) {
-  // Extract the specific activities from the existing robust database
-  const atvActivity = EXPERIENCES.find(e => e.id === 'atv-quad') || EXPERIENCES[5];
-  const tubingActivity = EXPERIENCES.find(e => e.id === 'river-tubing') || EXPERIENCES[6];
-  const swingActivity = EXPERIENCES.find(e => e.id === 'bali-jungle-swing') || EXPERIENCES[7];
-  const snorkelingActivity = EXPERIENCES.find(e => e.id === 'snorkeling') || EXPERIENCES[8];
+const OUTDOOR_ACTIVITIES = [
+  {
+    id: 'atv-quad',
+    title: 'Bali ATV Quad Bike Adventure',
+    tagline: 'HIGH ADRENALINE',
+    rating: 4.9,
+    pricePerPerson: 45,
+    duration: '2 Hours',
+    location: 'Ubud, Gianyar',
+    badge: 'Terpopuler',
+    accentColor: 'text-amber-500',
+    borderColor: 'hover:border-amber-500/40',
+    icon: <Flame size={14} className="text-amber-500" />,
+    cardImage: '/activity_atv_jungle_1783677762979.jpg',
+    shortDesc: 'Pacu adrenalin menembus trek hutan basah, goa air terjun, dan kubangan lumpur alami di Ubud.',
+    highlights: ['All-Terrain Quad 250cc', 'Pemandu Lisensi & Asuransi Penuh', 'Makan Siang Prasmanan Termasuk'],
+  },
+  {
+    id: 'river-tubing',
+    title: 'Ayung River Rafting & Tubing',
+    tagline: 'WILD RIVER',
+    rating: 4.8,
+    pricePerPerson: 35,
+    duration: '3 Hours',
+    location: 'Payangan, Ubud',
+    badge: 'Rekomendasi',
+    accentColor: 'text-teal-400',
+    borderColor: 'hover:border-teal-400/40',
+    icon: <Compass size={14} className="text-teal-400" />,
+    cardImage: '/activity_river_tubing_1783677780719.jpg',
+    shortDesc: 'Menyusuri jeram Sungai Ayung sepanjang 10 km dengan pemandangan tebing relief Ramayana dan air terjun.',
+    highlights: ['Peralatan Standard Internasional', 'Instruktur Profesional', 'Shower & Handuk Bersih'],
+  },
+  {
+    id: 'bali-jungle-swing',
+    title: 'Bali Jungle Swing & Plantation',
+    tagline: 'INSTAGRAMMABLE',
+    rating: 4.9,
+    pricePerPerson: 25,
+    duration: '2 Hours',
+    location: 'Tegalalang, Ubud',
+    badge: 'Instagrammable',
+    accentColor: 'text-pink-400',
+    borderColor: 'hover:border-pink-400/40',
+    icon: <Wind size={14} className="text-pink-400" />,
+    cardImage: 'https://res.cloudinary.com/di6ziqvtp/image/upload/v1787397434/c67903ef-d494-4a2d-8614-e2e2964fc934.png',
+    shortDesc: 'Sensasi melayang di atas lembah hijau dan terasering sawah dengan spot foto ikonik sarang burung.',
+    highlights: ['Multiple Swing Heights', 'Tasting Kopi Luwak Gratis', 'Spot Foto Sarang Burung'],
+  },
+  {
+    id: 'snorkeling',
+    title: 'Blue Lagoon & Reef Snorkeling',
+    tagline: 'OCEAN LIFE',
+    rating: 4.8,
+    pricePerPerson: 38,
+    duration: '4 Hours',
+    location: 'Padangbai, Karangasem',
+    badge: 'Terlaris',
+    accentColor: 'text-blue-400',
+    borderColor: 'hover:border-blue-400/40',
+    icon: <Waves size={14} className="text-blue-400" />,
+    cardImage: 'https://res.cloudinary.com/di6ziqvtp/image/upload/v1788783724/08865608-6a19-42db-aee3-2a8ec628dd1a.png',
+    shortDesc: 'Berenang bersama ikan nemo dan terumbu karang warna-warni di perairan jernih Blue Lagoon & Tanjung Jepun.',
+    highlights: ['Perahu Tradisional Jukung', 'Full Snorkel Gear & Fin', 'Pakan Ikan & Dokumentasi'],
+  },
+];
 
-  const activities = [
-    {
-      ...atvActivity,
-      badge: 'Terpopuler',
-      accentColor: 'text-amber-500',
-      borderColor: 'hover:border-amber-500/40',
-      icon: <Flame size={14} className="text-amber-500" />
-    },
-    {
-      ...tubingActivity,
-      badge: 'Rekomendasi',
-      accentColor: 'text-teal-400',
-      borderColor: 'hover:border-teal-400/40',
-      icon: <Compass size={14} className="text-teal-400" />
-    },
-    {
-      ...swingActivity,
-      badge: 'Instagrammable',
-      accentColor: 'text-pink-400',
-      borderColor: 'hover:border-pink-400/40',
-      icon: <Wind size={14} className="text-pink-400" />
-    },
-    {
-      ...snorkelingActivity,
-      badge: 'Terlaris',
-      accentColor: 'text-blue-400',
-      borderColor: 'hover:border-blue-400/40',
-      icon: <Waves size={14} className="text-blue-400" />
-    }
-  ];
+export default function ActivitySection({ onBookNow }: ActivitySectionProps) {
+  const activities = OUTDOOR_ACTIVITIES;
+
+  const handleActivityBooking = (act: typeof OUTDOOR_ACTIVITIES[0]) => {
+    const text = `Halo Tim Gede Bali Trip, saya tertarik booking aktivitas *${act.title}* ($${act.pricePerPerson}/pax). Mohon info ketersediaan slotnya. Terima kasih!`;
+    const encoded = encodeURIComponent(text);
+    window.location.href = `https://wa.me/6281239633946?text=${encoded}`;
+  };
 
   return (
     <section id="luxury-activities" className="py-24 bg-neutral-900/40 border-b border-gold-500/10 relative overflow-hidden">
@@ -102,7 +139,7 @@ export default function ActivitySection({ onBookNow }: ActivitySectionProps) {
                     <div className="flex items-center space-x-1 bg-neutral-950/90 backdrop-blur-md border border-gold-900/30 px-2 py-1 rounded-sm shadow-md">
                       <Star size={10} className="fill-gold-400 text-gold-400" />
                       <span className="font-mono text-[9px] font-bold text-gold-100">
-                        {activity.rating.toFixed(1)}
+                        {activity.rating ? activity.rating.toFixed(1) : '4.9'}
                       </span>
                     </div>
                   </div>
@@ -119,11 +156,11 @@ export default function ActivitySection({ onBookNow }: ActivitySectionProps) {
                   <div className="absolute bottom-3 right-4 z-10 flex flex-col items-end space-y-0.5 text-right font-mono text-[9px] text-gold-300/80">
                     <div className="flex items-center gap-1">
                       <Clock size={10} className="text-gold-400" />
-                      <span>{activity.duration.split(' ')[0]} {activity.duration.includes('Hari') ? 'Hari' : 'Hours'}</span>
+                      <span>{activity.duration ? activity.duration.split(' ')[0] : '2'} {activity.duration?.includes('Hari') ? 'Hari' : 'Hours'}</span>
                     </div>
                     <div className="flex items-center gap-1">
                       <MapPin size={10} className="text-gold-400" />
-                      <span>{activity.location.split(',')[0]}</span>
+                      <span>{activity.location ? activity.location.split(',')[0] : 'Bali'}</span>
                     </div>
                   </div>
                 </div>
@@ -168,10 +205,10 @@ export default function ActivitySection({ onBookNow }: ActivitySectionProps) {
                       <span className="font-mono text-[9px] text-gold-300/70 truncate">Asuransi & Fasilitas Termasuk</span>
                     </div>
                     <button
-                      onClick={() => onBookNow(activity.id)}
+                      onClick={() => handleActivityBooking(activity)}
                       className="w-full bg-gold-400 hover:bg-gold-500 text-neutral-950 font-mono text-[10px] uppercase tracking-widest font-bold py-2.5 px-4 rounded-sm transition-all duration-300 flex items-center justify-center gap-2 shadow-md cursor-pointer active:scale-95"
                     >
-                      <span>Booking Sekarang</span>
+                      <span>Booking WhatsApp</span>
                       <ArrowRight size={11} />
                     </button>
                   </div>

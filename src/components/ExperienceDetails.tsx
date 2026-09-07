@@ -1,14 +1,14 @@
 import React from 'react';
 import { Clock, MapPin, Star, Sparkles, Check, ArrowRight, ShieldCheck, Award } from 'lucide-react';
-import { EXPERIENCES } from '../data';
+import { HOME_EXPERIENCES } from '../data';
 
 interface ExperienceDetailsProps {
   onBookNow: (experienceId: string) => void;
 }
 
 export default function ExperienceDetails({ onBookNow }: ExperienceDetailsProps) {
-  // Only showcase the 3 core signature packages on the landing page
-  const signatureExperiences = EXPERIENCES.slice(0, 3);
+  // Showcase the 3 core signature packages on the landing page
+  const signatureExperiences = HOME_EXPERIENCES;
 
   return (
     <section id="experiences" className="py-24 bg-neutral-900 border-t border-b border-gold-500/10">
@@ -100,15 +100,19 @@ export default function ExperienceDetails({ onBookNow }: ExperienceDetailsProps)
                 <div className="pt-6 mt-8 border-t border-gold-900/15 flex items-center justify-between gap-4">
                   <div className="text-left">
                     <span className="block text-[9px] font-mono text-gold-300/40 tracking-widest uppercase font-semibold">Mulai</span>
-                    <span className="font-mono text-xl font-bold text-gold-300">${exp.pricePerPerson}</span>
-                    <span className="text-[10px] text-gold-200/40 font-light"> / orang</span>
+                    <span className="font-mono text-xl font-bold text-gold-300">
+                      USD ${exp.pricePerCar ? exp.pricePerCar : exp.pricePerPerson}
+                    </span>
+                    <span className="text-[10px] text-gold-200/40 font-light">
+                      {exp.pricePerCar ? ' / car' : ' / orang'}
+                    </span>
                   </div>
 
                   <button
                     onClick={() => onBookNow(exp.id)}
                     className="bg-gold-400 hover:bg-gold-500 text-neutral-950 font-mono text-xs uppercase tracking-widest font-extrabold px-6 py-3.5 rounded-sm transition-all shadow-md cursor-pointer hover:shadow-gold-500/10 flex items-center gap-1.5 active:scale-95"
                   >
-                    <span>Book Now</span>
+                    <span>{exp.buttonText || 'Book Now'}</span>
                     <ArrowRight size={12} className="stroke-[2.5]" />
                   </button>
                 </div>

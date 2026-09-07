@@ -18,7 +18,7 @@ import RentalSection from './components/RentalSection';
 import RentalPage from './components/RentalPage';
 
 import { Experience, BookingDetails } from './types';
-import { EXPERIENCES } from './data';
+import { EXPERIENCES, HOME_EXPERIENCES, TOUR_PACKAGES } from './data';
 
 type Page = 'home' | 'tours' | 'rental' | 'about' | 'gallery' | 'whyus' | 'contact';
 
@@ -38,11 +38,11 @@ export default function App() {
   // General booking click (pre-select current active experience in hero)
   const handleGeneralBookNow = () => {
     if (activePage === 'home') {
-      const currentId = EXPERIENCES[heroActiveIndex]?.id || 'nusa-penida';
+      const currentId = HOME_EXPERIENCES[heroActiveIndex]?.id || 'jeep-adventure';
       handleOpenBooking(currentId);
     } else {
-      // Default to first experience on other pages
-      handleOpenBooking(EXPERIENCES[0]?.id || 'nusa-penida');
+      // Default to first tour package on other pages
+      handleOpenBooking(TOUR_PACKAGES[0]?.id || EXPERIENCES[0]?.id);
     }
   };
 

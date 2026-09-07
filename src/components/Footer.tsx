@@ -47,12 +47,18 @@ export default function Footer() {
         {/* Brand Description Column */}
         <div className="lg:col-span-4 space-y-6">
           <div className="flex items-center space-x-3.5">
+            <img
+              src="https://res.cloudinary.com/di6ziqvtp/image/upload/v1788783630/2dff2e80-f5bc-4bd7-8c97-2c99e0d9db5f.png"
+              alt="Gede Bali Trip Logo"
+              className="h-12 md:h-14 w-auto object-contain"
+              referrerPolicy="no-referrer"
+            />
             <div className="flex flex-col">
-              <span className="font-serif text-2xl tracking-widest text-gold-200 lowercase font-semibold">
-                gede bali trip
+              <span className="font-serif text-xl tracking-wider text-gold-200 uppercase font-bold">
+                Gede Bali Trip
               </span>
-              <span className="font-sans text-[10px] uppercase tracking-[0.25em] text-gold-300/80 -mt-1 font-semibold">
-                Premium Tour & Travel
+              <span className="font-sans text-[9px] uppercase tracking-[0.25em] text-gold-400 font-semibold">
+                Private Tour & Driver
               </span>
             </div>
           </div>

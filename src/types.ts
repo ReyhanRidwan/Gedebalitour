@@ -22,6 +22,10 @@ export interface Experience {
   highlights: string[];
   rating: number;
   reviewCount: number;
+  pricePerCar?: number;
+  buttonText?: string;
+  extraHourRate?: string;
+  tourType?: string;
 }
 
 export interface BookingAddon {

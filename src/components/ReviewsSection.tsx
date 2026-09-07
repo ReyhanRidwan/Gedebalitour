@@ -215,6 +215,8 @@ export default function ReviewsSection() {
                           <option value="jeep-adventure">Bali Jeep Adventure</option>
                           <option value="ocean-escape">Ocean Luxury Escape</option>
                           <option value="jungle-retreat">Serene Jungle Retreat</option>
+                          <option value="ubud-highlights">Ubud Highlights Tour</option>
+                          <option value="uluwatu-sunset">Uluwatu & Sunset Tour</option>
                         </select>
                       </div>
                     </div>
@@ -301,6 +303,8 @@ export default function ReviewsSection() {
                         {r.experienceId === 'jeep-adventure' && 'Volcano Tour'}
                         {r.experienceId === 'ocean-escape' && 'Yacht Cruise'}
                         {r.experienceId === 'jungle-retreat' && 'Jungle Sanctuary'}
+                        {r.experienceId === 'ubud-highlights' && 'Ubud Tour'}
+                        {r.experienceId === 'uluwatu-sunset' && 'Uluwatu Sunset'}
                       </p>
                     </div>
                   </div>

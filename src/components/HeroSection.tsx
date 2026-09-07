@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ChevronDown, Calendar, Compass, ShieldCheck } from 'lucide-react';
 import { Experience } from '../types';
-import { EXPERIENCES } from '../data';
+import { HOME_EXPERIENCES } from '../data';
 
 interface HeroSectionProps {
   activeIndex: number;
@@ -17,7 +17,7 @@ export default function HeroSection({
   onExploreClick,
   onBookNowClick,
 }: HeroSectionProps) {
-  const currentExp = EXPERIENCES[activeIndex];
+  const currentExp = HOME_EXPERIENCES[activeIndex] || HOME_EXPERIENCES[0];
 
   const containerRef = useRef<HTMLDivElement>(null);
   const [dragOffset, setDragOffset] = useState(0);
@@ -32,7 +32,7 @@ export default function HeroSection({
   const startAutoplay = () => {
     stopAutoplay();
     autoplayTimerRef.current = setInterval(() => {
-      setActiveIndex((activeIndex + 1) % EXPERIENCES.length);
+      setActiveIndex((activeIndex + 1) % HOME_EXPERIENCES.length);
     }, 5000);
   };
 
@@ -122,7 +122,7 @@ export default function HeroSection({
     let finalDelta = deltaX;
     if (activeIndex === 0 && deltaX > 0) {
       finalDelta = deltaX * 0.4;
-    } else if (activeIndex === EXPERIENCES.length - 1 && deltaX < 0) {
+    } else if (activeIndex === HOME_EXPERIENCES.length - 1 && deltaX < 0) {
       finalDelta = deltaX * 0.4;
     }
     
@@ -136,7 +136,7 @@ export default function HeroSection({
 
     const swipeThreshold = 50;
     if (dragOffset < -swipeThreshold) {
-      if (activeIndex < EXPERIENCES.length - 1) {
+      if (activeIndex < HOME_EXPERIENCES.length - 1) {
         setActiveIndex(activeIndex + 1);
       }
     } else if (dragOffset > swipeThreshold) {
@@ -253,7 +253,7 @@ export default function HeroSection({
 
         {/* Eager preloading for the other carousel slides to make transitions instant */}
         <div className="hidden" aria-hidden="true" style={{ display: 'none' }}>
-          {EXPERIENCES.map((exp, idx) => (
+          {HOME_EXPERIENCES.map((exp, idx) => (
             idx !== activeIndex && (
               <img
                 key={exp.id}
@@ -322,7 +322,7 @@ export default function HeroSection({
                 Curated Destinations
               </span>
               <span className="font-mono text-[10px] text-gold-400 font-semibold tracking-widest">
-                {String(activeIndex + 1).padStart(2, '0')} / {String(EXPERIENCES.length).padStart(2, '0')}
+                {String(activeIndex + 1).padStart(2, '0')} / {String(HOME_EXPERIENCES.length).padStart(2, '0')}
               </span>
             </div>
 
@@ -344,7 +344,7 @@ export default function HeroSection({
                   isDragging ? 'cursor-grabbing' : 'cursor-grab'
                 }`}
               >
-                {EXPERIENCES.map((exp, index) => {
+                {HOME_EXPERIENCES.map((exp, index) => {
                   const isActive = index === activeIndex;
 
                   return (

@@ -22,7 +22,7 @@ interface DestinationGridProps {
 export default function DestinationGrid({ onBookNow }: DestinationGridProps) {
   const destinations: DestinationCard[] = [
     {
-      id: 'jeep-adventure', // matches ocean-escape or jeep-adventure to map booking modal pre-selection
+      id: 'jeep-adventure',
       title: 'Nusa Penida Golden Beach',
       tagline: 'EXPLORASI PREMIUM',
       rating: 4.9,
@@ -55,7 +55,7 @@ export default function DestinationGrid({ onBookNow }: DestinationGridProps) {
       image: '/bedugul_danau_beratan_1783579216449.jpg',
       cols: 'lg:col-span-1',
       rows: 'lg:row-span-1',
-      heightClass: 'h-[264px] lg:h-[256px]', // offsets perfectly to match double row on left
+      heightClass: 'h-[264px] lg:h-[256px]',
     },
     {
       id: 'jeep-adventure',
@@ -144,7 +144,7 @@ export default function DestinationGrid({ onBookNow }: DestinationGridProps) {
                 <div className="flex items-center gap-1.5 mb-2">
                   <Star className="w-3.5 h-3.5 fill-gold-400 text-gold-400" />
                   <span className="font-mono text-[11px] text-gold-300 font-bold">
-                    {dest.rating.toFixed(1)}
+                    {dest.rating ? dest.rating.toFixed(1) : '4.9'}
                   </span>
                   <span className="text-gold-200/50 text-[10px]">
                     ({dest.reviews} ulasan)

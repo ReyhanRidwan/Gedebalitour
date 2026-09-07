@@ -117,14 +117,14 @@ export default function BookingModal({
   const currentExp = EXPERIENCES.find((e) => e.id === selectedExpId) || EXPERIENCES[0];
 
   // Price calculations
-  const basePrice = currentExp.pricePerPerson * guests;
+  const basePrice = currentExp.pricePerCar ? currentExp.pricePerCar : currentExp.pricePerPerson * guests;
   const addonsPrice = BOOKING_ADDONS.filter((addon) => selectedAddons.includes(addon.id)).reduce(
     (total, addon) => total + addon.price,
     0
   );
   const subtotal = basePrice + addonsPrice;
-  const tax = Math.round(subtotal * 0.1); // 10% Luxury tax
-  const grandTotal = subtotal + tax;
+  const tax = 0; // Fuel, taxes and vehicle charges already included
+  const grandTotal = subtotal;
 
   const handleAddonToggle = (addonId: string) => {
     if (selectedAddons.includes(addonId)) {
@@ -245,8 +245,8 @@ Halo Tim Gede Bali Trip, saya ingin mengonfirmasi pemesanan dan pembayaran untuk
     setStep('success');
     onBookingSuccess(bookingObj as any);
 
-    // Open WhatsApp URL directly
-    window.open(waUrl, '_blank');
+    // Redirect to WhatsApp URL directly without a new tab
+    window.location.href = waUrl;
   };
 
   const handlePaymentSubmit = (e: React.FormEvent) => {
@@ -290,12 +290,17 @@ Halo Tim Gede Bali Trip, saya ingin mengonfirmasi pemesanan dan pembayaran untuk
       >
         {/* Header bar */}
         <div className="flex items-center justify-between px-6 py-4 bg-neutral-900 border-b border-gold-900/10">
-          <div className="flex items-center space-x-2">
-            <Sparkles size={16} className="text-gold-400" />
+          <div className="flex items-center space-x-3">
+            <img
+              src="https://res.cloudinary.com/di6ziqvtp/image/upload/v1788783630/2dff2e80-f5bc-4bd7-8c97-2c99e0d9db5f.png"
+              alt="Gede Bali Trip"
+              className="h-8 w-auto object-contain"
+              referrerPolicy="no-referrer"
+            />
             <h2 className="font-serif text-lg text-gold-200 tracking-wide font-medium">
               {step === 'details' && 'Reservasi Paket Tour VIP'}
-              {step === 'payment_gateway' && 'Gerbang Pembayaran Aman (Payment Gateway)'}
-              {step === 'processing' && 'Memproses Pembayaran...'}
+              {step === 'payment_gateway' && 'Konfirmasi Reservasi WhatsApp'}
+              {step === 'processing' && 'Menghubungkan ke WhatsApp...'}
               {step === 'success' && 'E-Tiket & Voucher Resmi Konfirmasi'}
             </h2>
           </div>
@@ -335,7 +340,7 @@ Halo Tim Gede Bali Trip, saya ingin mengonfirmasi pemesanan dan pembayaran untuk
                   >
                     {EXPERIENCES.map((exp) => (
                       <option key={exp.id} value={exp.id}>
-                        {exp.title} — ${exp.pricePerPerson} per orang
+                        {exp.title} — {exp.pricePerCar ? `$${exp.pricePerCar} / car` : `$${exp.pricePerPerson} per orang`}
                       </option>
                     ))}
                   </select>
@@ -860,9 +865,17 @@ Halo Tim Gede Bali Trip, saya ingin mengonfirmasi pemesanan dan pembayaran untuk
                 <div className="relative z-10 space-y-8">
                   {/* Voucher Header with Branding and QR Code */}
                   <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-b border-gold-900/15 pb-6">
-                    <div className="text-left">
-                      <span className="font-serif text-2xl text-gold-200 font-bold tracking-widest uppercase">GEDE BALI TRIP</span>
-                      <span className="block text-[9px] font-mono tracking-[0.25em] text-gold-300/80 uppercase font-bold mt-0.5">EXCLUSIVE PRIVATE TOUR & TRANSPORT</span>
+                    <div className="flex items-center space-x-3.5 text-left">
+                      <img
+                        src="https://res.cloudinary.com/di6ziqvtp/image/upload/v1788783630/2dff2e80-f5bc-4bd7-8c97-2c99e0d9db5f.png"
+                        alt="Gede Bali Trip Logo"
+                        className="h-12 w-auto object-contain"
+                        referrerPolicy="no-referrer"
+                      />
+                      <div>
+                        <span className="font-serif text-2xl text-gold-200 font-bold tracking-widest uppercase block">GEDE BALI TRIP</span>
+                        <span className="block text-[9px] font-mono tracking-[0.25em] text-gold-300/80 uppercase font-bold mt-0.5">EXCLUSIVE PRIVATE TOUR & TRANSPORT</span>
+                      </div>
                     </div>
 
                     <div className="bg-white p-2 rounded-sm border border-gold-400 flex items-center gap-3">

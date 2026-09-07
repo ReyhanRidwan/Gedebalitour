@@ -54,15 +54,21 @@ export default function Navbar({ activePage, setActivePage, onBookNow }: NavbarP
         {/* Brand Logo */}
         <button
           onClick={() => handleNavClick('home')}
-          className="flex items-center space-x-3.5 select-none group text-left cursor-pointer"
+          className="flex items-center space-x-3 select-none group text-left cursor-pointer"
           id="nav-logo"
         >
+          <img
+            src="https://res.cloudinary.com/di6ziqvtp/image/upload/v1788783630/2dff2e80-f5bc-4bd7-8c97-2c99e0d9db5f.png"
+            alt="Gede Bali Trip Logo"
+            className="h-10 md:h-11 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+            referrerPolicy="no-referrer"
+          />
           <div className="flex flex-col">
-            <span className="font-serif text-lg md:text-xl tracking-widest text-gold-200 group-hover:text-gold-400 transition-colors duration-300 lowercase font-semibold">
-              gede bali trip
+            <span className="font-serif text-base md:text-lg tracking-wider text-gold-200 group-hover:text-gold-400 transition-colors duration-300 uppercase font-bold">
+              Gede Bali Trip
             </span>
-            <span className="font-sans text-[8px] uppercase tracking-[0.2em] text-gold-300/80 -mt-1 font-semibold group-hover:text-gold-100 transition-colors duration-300">
-              Premium Tour & Travel
+            <span className="font-sans text-[8px] uppercase tracking-[0.2em] text-gold-300/80 -mt-0.5 font-semibold group-hover:text-gold-100 transition-colors duration-300">
+              Private Tour & Driver
             </span>
           </div>
         </button>
