@@ -1,4 +1,4 @@
-import type { Experience, BookingAddon, Review, Vehicle } from './types';
+import { Experience, BookingAddon, Review, Vehicle } from './types';
 
 export const HOME_EXPERIENCES: Experience[] = [
   {

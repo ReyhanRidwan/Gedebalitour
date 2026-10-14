@@ -1,6 +1,0 @@
-{
-  "summary": "Architectural plan to migrate Gede Bali Trip from React 19 SPA to Astro framework with native Astro components and vanilla JS for near-100 PageSpeed scores, true multi-page static routes, and optimized media delivery.",
-  "updatedAt": "2026-10-13T14:53:20.889955101Z",
-  "requestFeedback": true,
-  "userFacing": true
-}
