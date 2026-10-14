@@ -1,0 +1,183 @@
+---
+interface Props {
+  activePage?: 'home' | 'tours' | 'rental' | 'about' | 'gallery' | 'whyus' | 'contact';
+}
+
+const { activePage = 'home' } = Astro.props;
+
+const menuItems = [
+  { href: '/', id: 'home', label: 'Beranda' },
+  { href: '/tours', id: 'tours', label: 'Paket Tour' },
+  { href: '/rental', id: 'rental', label: 'Sewa & Layanan' },
+  { href: '/about', id: 'about', label: 'About' },
+  { href: '/gallery', id: 'gallery', label: 'Gallery' },
+  { href: '/why-us', id: 'whyus', label: 'Why Us' },
+  { href: '/contact', id: 'contact', label: 'Contact' },
+];
+---
+
+<header
+  id="main-header"
+  class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 bg-gradient-to-b from-neutral-950/90 via-neutral-950/20 to-transparent py-5"
+>
+  <div class="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
+    
+    <!-- Brand Logo -->
+    <a
+      href="/"
+      class="flex items-center space-x-3 select-none group text-left cursor-pointer"
+      id="nav-logo"
+    >
+      <img
+        src="https://res.cloudinary.com/di6ziqvtp/image/upload/v1788783630/2dff2e80-f5bc-4bd7-8c97-2c99e0d9db5f.png"
+        alt="Gede Bali Trip Logo"
+        class="h-10 md:h-11 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+        referrerpolicy="no-referrer"
+        loading="eager"
+      />
+      <div class="flex flex-col">
+        <span class="font-serif text-base md:text-lg tracking-wider text-gold-200 group-hover:text-gold-400 transition-colors duration-300 uppercase font-bold">
+          Gede Bali Trip
+        </span>
+        <span class="font-sans text-[8px] uppercase tracking-[0.2em] text-gold-300/80 -mt-0.5 font-semibold group-hover:text-gold-100 transition-colors duration-300">
+          Private Tour & Driver
+        </span>
+      </div>
+    </a>
+
+    <!-- Desktop Links -->
+    <nav class="hidden md:flex items-center space-x-8 lg:space-x-10" id="desktop-nav">
+      {menuItems.map((item) => (
+        <a
+          href={item.href}
+          class={`text-[11px] uppercase tracking-[0.2em] font-mono font-semibold transition-all duration-300 cursor-pointer relative py-1 ${
+            activePage === item.id
+              ? 'text-gold-400 font-bold'
+              : 'text-gold-100/75 hover:text-gold-300'
+          }`}
+        >
+          {item.label}
+          {activePage === item.id && (
+            <span class="absolute bottom-0 left-0 right-0 h-[1.5px] bg-gold-400 rounded-full" />
+          )}
+        </a>
+      ))}
+    </nav>
+
+    <!-- Action Button -->
+    <div class="hidden md:flex items-center">
+      <button
+        type="button"
+        data-book-trigger="true"
+        data-book-id="jeep-adventure"
+        id="btn-nav-book"
+        class="bg-gold-400 hover:bg-gold-500 text-neutral-950 font-mono text-[10px] uppercase tracking-[0.2em] font-bold px-6 py-3 transition-all duration-300 shadow-md hover:shadow-gold-500/10 cursor-pointer rounded-sm active:scale-95"
+      >
+        Book Now
+      </button>
+    </div>
+
+    <!-- Mobile Menu Trigger -->
+    <button
+      type="button"
+      id="btn-mobile-menu"
+      class="md:hidden text-gold-200 hover:text-gold-400 transition-colors focus:outline-none p-1 cursor-pointer"
+      aria-label="Toggle menu"
+      aria-expanded="false"
+    >
+      <svg id="icon-menu-open" class="w-6 h-6 block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+      <svg id="icon-menu-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile Menu Backdrop & Overlay -->
+  <div
+    id="mobile-nav-panel"
+    class="fixed inset-0 top-[65px] z-40 bg-neutral-950/95 backdrop-blur-xl md:hidden flex-col justify-between py-12 px-6 border-t border-gold-900/15 hidden"
+  >
+    <div class="flex flex-col space-y-7 items-center mt-6">
+      {menuItems.map((item) => (
+        <a
+          href={item.href}
+          class={`text-base uppercase tracking-[0.2em] font-mono font-bold transition-colors cursor-pointer ${
+            activePage === item.id ? 'text-gold-400' : 'text-gold-100/80 hover:text-gold-300'
+          }`}
+        >
+          {item.label}
+        </a>
+      ))}
+    </div>
+
+    <div class="flex flex-col space-y-6 items-center">
+      <button
+        type="button"
+        data-book-trigger="true"
+        data-book-id="jeep-adventure"
+        id="btn-mobile-book"
+        class="w-full max-w-xs bg-gold-400 hover:bg-gold-500 text-neutral-950 font-mono text-xs uppercase tracking-[0.2em] font-bold py-4 transition-all rounded-sm shadow-md cursor-pointer"
+      >
+        Book Now
+      </button>
+      <div class="flex items-center space-x-2 text-[9px] font-mono text-gold-300/40">
+        <svg class="w-3 h-3 text-gold-400" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 2l2.4 7.4h7.6l-6.2 4.5 2.4 7.4-6.2-4.5-6.2 4.5 2.4-7.4-6.2-4.5h7.6z"/>
+        </svg>
+        <span>Gede Bali Trip 24/7 Concierge Hotline</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script is:inline>
+  (function () {
+    const header = document.getElementById('main-header');
+    const menuBtn = document.getElementById('btn-mobile-menu');
+    const menuPanel = document.getElementById('mobile-nav-panel');
+    const openIcon = document.getElementById('icon-menu-open');
+    const closeIcon = document.getElementById('icon-menu-close');
+
+    // Scroll effect
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 40) {
+        header?.classList.add('bg-neutral-950/95', 'backdrop-blur-md', 'border-b', 'border-gold-900/15', 'py-4', 'shadow-xl');
+        header?.classList.remove('bg-gradient-to-b', 'from-neutral-950/90', 'via-neutral-950/20', 'to-transparent', 'py-5');
+      } else {
+        header?.classList.remove('bg-neutral-950/95', 'backdrop-blur-md', 'border-b', 'border-gold-900/15', 'py-4', 'shadow-xl');
+        header?.classList.add('bg-gradient-to-b', 'from-neutral-950/90', 'via-neutral-950/20', 'to-transparent', 'py-5');
+      }
+    }, { passive: true });
+
+    // Mobile menu toggle
+    menuBtn?.addEventListener('click', () => {
+      const isOpen = !menuPanel?.classList.contains('hidden');
+      if (isOpen) {
+        menuPanel?.classList.add('hidden');
+        menuPanel?.classList.remove('flex');
+        openIcon?.classList.remove('hidden');
+        closeIcon?.classList.add('hidden');
+        menuBtn?.setAttribute('aria-expanded', 'false');
+      } else {
+        menuPanel?.classList.remove('hidden');
+        menuPanel?.classList.add('flex');
+        openIcon?.classList.add('hidden');
+        closeIcon?.classList.remove('hidden');
+        menuBtn?.setAttribute('aria-expanded', 'true');
+      }
+    });
+
+    // Close mobile panel on link click
+    menuPanel?.querySelectorAll('a, button')?.forEach(el => {
+      el.addEventListener('click', () => {
+        menuPanel?.classList.add('hidden');
+        menuPanel?.classList.remove('flex');
+        openIcon?.classList.remove('hidden');
+        closeIcon?.classList.add('hidden');
+        menuBtn?.setAttribute('aria-expanded', 'false');
+      });
+    });
+  })();
+</script>

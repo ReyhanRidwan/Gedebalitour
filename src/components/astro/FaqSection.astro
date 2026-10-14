@@ -1,0 +1,75 @@
+---
+import { FAQS } from '../../data';
+---
+
+<section id="faqs" class="py-24 bg-neutral-950 border-t border-gold-900/10">
+  <div class="max-w-4xl mx-auto px-6 md:px-12">
+    
+    <!-- Title Header -->
+    <div class="text-center space-y-4 mb-16">
+      <span class="font-mono text-xs uppercase tracking-[0.25em] text-gold-400 font-bold bg-gold-500/5 px-4 py-2 border border-gold-400/10 rounded-full inline-block">
+        Frequently Asked Questions
+      </span>
+      <h2 class="font-serif text-3xl md:text-5xl text-gold-100 font-medium tracking-wide">
+        Pertanyaan Umum Seputar Layanan
+      </h2>
+      <p class="font-sans text-sm md:text-base text-gold-200/60 leading-relaxed font-light">
+        Segala hal yang perlu Anda ketahui mengenai pemesanan tur privat, kebijakan cuaca, dan fasilitas supir kami.
+      </p>
+    </div>
+
+    <!-- Accordion List -->
+    <div class="space-y-4 text-left" id="faq-accordion-list">
+      {FAQS.map((faq, idx) => (
+        <div class="faq-item bg-neutral-900/50 border border-gold-400/10 rounded-lg overflow-hidden transition-all duration-300">
+          <button
+            type="button"
+            class="faq-trigger w-full px-6 py-5 flex items-center justify-between text-left cursor-pointer hover:bg-neutral-900/80 transition-colors"
+            data-index={idx}
+          >
+            <span class="font-serif text-base md:text-lg text-gold-200 font-medium pr-4">
+              {faq.question}
+            </span>
+            <span class="faq-icon text-gold-400 font-mono text-xl transition-transform duration-300">
+              +
+            </span>
+          </button>
+          <div class="faq-content hidden px-6 pb-6 pt-1 text-sm text-gold-200/70 font-sans leading-relaxed border-t border-gold-900/10">
+            {faq.answer}
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<script is:inline>
+  (function () {
+    const triggers = document.querySelectorAll('.faq-trigger');
+
+    triggers.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const content = item?.querySelector('.faq-content');
+        const icon = btn.querySelector('.faq-icon');
+
+        const isCurrentlyOpen = !content?.classList.contains('hidden');
+
+        // Close all
+        document.querySelectorAll('.faq-content').forEach((c) => c.classList.add('hidden'));
+        document.querySelectorAll('.faq-icon').forEach((i) => {
+          i.textContent = '+';
+          i.classList.remove('rotate-45');
+        });
+
+        if (!isCurrentlyOpen) {
+          content?.classList.remove('hidden');
+          if (icon) {
+            icon.textContent = '−';
+          }
+        }
+      });
+    });
+  })();
+</script>

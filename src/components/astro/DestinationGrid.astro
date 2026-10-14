@@ -1,0 +1,141 @@
+---
+const destinations = [
+  {
+    id: 'jeep-adventure',
+    title: 'Nusa Penida Golden Beach',
+    tagline: 'EXPLORASI PREMIUM',
+    rating: 4.9,
+    reviews: 340,
+    description: 'Petualangan eksklusif menyusuri tebing purba Kelingking Beach yang dramatis, berenang di antara penyu liar, dan menatap laut safir yang membentang luas.',
+    image: '/nusa_penida_golden_beach_1783579187768.jpg',
+    cols: 'lg:col-span-2',
+    rows: 'lg:row-span-2',
+    heightClass: 'h-[420px] lg:h-[520px]',
+  },
+  {
+    id: 'ocean-escape',
+    title: 'Nusa Dua Exclusive Beach',
+    tagline: 'ELITE RESORTS',
+    rating: 4.8,
+    reviews: 180,
+    description: 'Kawasan pantai pasir putih nan tenang yang dikelilingi oleh jajaran resort mewah bertaraf internasional.',
+    image: '/nusa_dua_beach_1783579200979.jpg',
+    cols: 'lg:col-span-1',
+    rows: 'lg:row-span-1',
+    heightClass: 'h-[240px]',
+  },
+  {
+    id: 'jungle-retreat',
+    title: 'Bedugul Danau Beratan',
+    tagline: 'SACRED TEMPLES',
+    rating: 4.7,
+    reviews: 220,
+    description: 'Pura terapung legendaris berselimut kabut lembut di antara pegunungan sejuk yang asri.',
+    image: '/bedugul_danau_beratan_1783579216449.jpg',
+    cols: 'lg:col-span-1',
+    rows: 'lg:row-span-1',
+    heightClass: 'h-[264px] lg:h-[256px]',
+  },
+  {
+    id: 'jeep-adventure',
+    title: 'Lempuyang Luhur Temple',
+    tagline: 'PHOTO INSPIRED',
+    rating: 4.9,
+    reviews: 410,
+    description: 'Abadikan momen magis di Gerbang Surga berlatar megahnya Gunung Agung yang sakral.',
+    image: '/lempuyang_temple_1783579255281.jpg',
+    cols: 'lg:col-span-1',
+    rows: 'lg:row-span-1',
+    heightClass: 'h-[256px]',
+  },
+  {
+    id: 'ocean-escape',
+    title: 'Uluwatu Sunset Horizon',
+    tagline: 'ROMANTIC OCEAN CLIFF',
+    rating: 4.8,
+    reviews: 290,
+    description: 'Saksikan pertunjukan tari Kecak legendaris di atas tebing karang terjal setinggi 70 meter di atas Samudra Hindia.',
+    image: '/uluwatu_cliff_1783579271777.jpg',
+    cols: 'lg:col-span-2',
+    rows: 'lg:row-span-1',
+    heightClass: 'h-[256px]',
+  }
+];
+---
+
+<section id="exclusive-destinations" class="py-20 px-4 md:px-8 bg-neutral-900 border-t border-b border-gold-500/10">
+  <div class="max-w-7xl mx-auto">
+    
+    <!-- Section Title -->
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+      <div>
+        <div class="flex items-center gap-2 mb-3">
+          <span class="w-8 h-[1px] bg-gold-400"></span>
+          <span class="font-mono text-xs uppercase tracking-[0.25em] text-gold-400 font-bold">
+            Bespoke Curations
+          </span>
+        </div>
+        <h2 class="font-serif text-3xl md:text-5xl text-gold-100 font-medium tracking-wide">
+          Eksplorasi Destinasi Elit Bali
+        </h2>
+      </div>
+      <p class="max-w-md text-gold-200/60 text-sm font-sans leading-relaxed">
+        Pilihan eksklusif tempat-tempat terindah di Bali yang telah kami rancang khusus untuk menghadirkan keajaiban murni di setiap detiknya.
+      </p>
+    </div>
+
+    <!-- Bento Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6" id="bento-grid-destinations">
+      {destinations.map((dest) => (
+        <div
+          class={`${dest.cols} ${dest.rows} ${dest.heightClass} relative rounded-xl overflow-hidden group shadow-xl shadow-black/40 cursor-pointer border border-gold-500/10 transition-transform duration-500 hover:-translate-y-1`}
+          data-book-trigger="true"
+          data-book-id={dest.id}
+        >
+          <!-- Background Image -->
+          <img
+            src={dest.image}
+            alt={dest.title}
+            loading="lazy"
+            referrerpolicy="no-referrer"
+            class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+          />
+
+          <!-- Gradient Overlays for High Legibility -->
+          <div class="absolute inset-0 bg-gradient-to-t from-neutral-950/95 via-neutral-950/40 to-transparent" />
+          <div class="absolute inset-0 bg-neutral-950/20 group-hover:bg-neutral-950/0 transition-colors duration-300" />
+
+          <!-- Card Content -->
+          <div class="absolute inset-0 p-6 md:p-8 flex flex-col justify-between text-left z-10">
+            <!-- Top Tagline & Rating -->
+            <div class="flex justify-between items-start">
+              <span class="bg-neutral-950/80 backdrop-blur-md border border-gold-400/25 text-gold-300 font-mono text-[9px] uppercase tracking-widest font-bold py-1 px-3 rounded-full">
+                {dest.tagline}
+              </span>
+              <div class="flex items-center space-x-1 bg-neutral-950/80 backdrop-blur-md border border-gold-900/30 px-2.5 py-1 rounded-full text-gold-400">
+                <span class="text-xs">★</span>
+                <span class="font-mono text-xs font-bold">{dest.rating}</span>
+                <span class="text-gold-200/40 text-[10px]">({dest.reviews})</span>
+              </div>
+            </div>
+
+            <!-- Bottom Titles & Details -->
+            <div class="space-y-2">
+              <h3 class="font-serif text-xl md:text-2xl lg:text-3xl text-gold-100 font-medium group-hover:text-gold-300 transition-colors">
+                {dest.title}
+              </h3>
+              <p class="text-gold-200/70 text-xs md:text-sm font-sans line-clamp-2 max-w-xl font-light">
+                {dest.description}
+              </p>
+              <div class="pt-2 flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-gold-400 font-semibold group-hover:translate-x-1 transition-transform">
+                <span>Pesan Rute Ini</span>
+                <span>→</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>

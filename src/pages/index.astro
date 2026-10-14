@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroSection from '../components/astro/HeroSection.astro';
+import DestinationGrid from '../components/astro/DestinationGrid.astro';
+import ActivitySection from '../components/astro/ActivitySection.astro';
+import ExperienceDetails from '../components/astro/ExperienceDetails.astro';
+import RentalSection from '../components/astro/RentalSection.astro';
+import ReviewsSection from '../components/astro/ReviewsSection.astro';
+import FaqSection from '../components/astro/FaqSection.astro';
+---
+
+<BaseLayout
+  title="Gede Bali Trip - Private Tour & Driver di Bali"
+  description="Layanan tur privat, petualangan outdoor, dan sewa mobil terbaik di Bali dengan supir profesional berbahasa Inggris."
+  activePage="home"
+>
+  <!-- Showstopper Hero Carousel -->
+  <HeroSection />
+
+  <!-- Bento Grid "Our Elite Expeditions" Showcase -->
+  <DestinationGrid />
+
+  <!-- Premium Outdoor Adventure & Wilderness Activities -->
+  <ActivitySection />
+
+  <!-- Signature 3-Column Experience Spec Sheets -->
+  <ExperienceDetails />
+
+  <!-- Featured Car & Motorbike Rental Section -->
+  <RentalSection />
+
+  <!-- Testimonials & Reviews -->
+  <ReviewsSection />
+
+  <!-- FAQs Section -->
+  <FaqSection />
+</BaseLayout>

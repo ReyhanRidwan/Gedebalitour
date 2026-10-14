@@ -1,6 +1,6 @@
 {
   "name": "Gede Bali Trip",
-  "description": "fokus activity bali, tidak ada masalah folder public, hero section di bagusin biar perfect",
+  "description": "Layanan tur privat, aktivitas petualangan, dan sewa mobil terbaik di Bali dengan supir profesional berbahasa Inggris.",
   "requestFramePermissions": [],
   "majorCapabilities": [
     "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"

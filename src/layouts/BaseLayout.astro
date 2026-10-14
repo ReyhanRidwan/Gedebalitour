@@ -1,0 +1,80 @@
+---
+import Navbar from '../components/astro/Navbar.astro';
+import Footer from '../components/astro/Footer.astro';
+import BookingModal from '../components/astro/BookingModal.astro';
+import '../index.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  activePage?: 'home' | 'tours' | 'rental' | 'about' | 'gallery' | 'whyus' | 'contact';
+}
+
+const {
+  title = "Gede Bali Trip - Private Tour & Driver",
+  description = "Layanan tur privat, aktivitas petualangan, dan sewa mobil terbaik di Bali dengan supir profesional berbahasa Inggris.",
+  activePage = 'home'
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="id" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="https://res.cloudinary.com/di6ziqvtp/image/upload/v1788783630/2dff2e80-f5bc-4bd7-8c97-2c99e0d9db5f.png" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  </head>
+  <body class="bg-neutral-950 text-gold-100 font-sans selection:bg-gold-500/20 selection:text-gold-200 min-h-screen flex flex-col">
+    <!-- Navbar Component -->
+    <Navbar activePage={activePage} />
+
+    <!-- Main Content Area -->
+    <main class="flex-grow">
+      <slot />
+    </main>
+
+    <!-- Global Footer -->
+    <Footer />
+
+    <!-- Global Interactive Booking Modal -->
+    <BookingModal />
+
+    <!-- Global Booking Trigger Handler -->
+    <script is:inline>
+      document.addEventListener('DOMContentLoaded', () => {
+        // Handle all clicks on elements with data-book-trigger or data-book-id
+        document.body.addEventListener('click', (e) => {
+          const trigger = e.target.closest('[data-book-trigger], [data-book-id]');
+          if (!trigger) return;
+
+          e.preventDefault();
+          const expId = trigger.getAttribute('data-book-id') || 'jeep-adventure';
+          
+          if (window.openBookingModal) {
+            window.openBookingModal(expId);
+          } else {
+            const modal = document.getElementById('global-booking-modal');
+            if (modal) {
+              modal.classList.remove('hidden');
+              document.body.classList.add('overflow-hidden');
+              const selectExp = document.getElementById('booking-select-experience');
+              if (selectExp) {
+                selectExp.value = expId;
+                selectExp.dispatchEvent(new Event('change'));
+              }
+            }
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
